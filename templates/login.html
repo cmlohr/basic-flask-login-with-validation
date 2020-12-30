@@ -1,10 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Login Info</title>
-</head>
-<body style="background-color: #191919; color: #fff;">
-<h1>User: {{ user }}, Password: {{ password }}</h1>
-</body>
-</html>
+{% extends "bootstrap/base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+        <div class="container">
+		<h1>Login</h1>
+        <form method="POST" action="{{ url_for('login') }}" novalidate>
+    {{ form.csrf_token }}
+			<p>
+    {{ form.email.label }} <br> {{ form.email(size=20) }}
+				{% for err in form.email.errors %}
+				<span style="color:red">{{ err }}</span>
+				{% endfor %}
+			</p>
+			<p>
+	{{ form.password.label }} <br> {{ form.password(size=20) }}
+			{% for err in form.password.errors %}
+				<span style="color:red">{{ err }}</span>
+				{% endfor %}
+			</p>
+    {{ form.submit }}
+</form>
+
+        </div>
+{% endblock %}
